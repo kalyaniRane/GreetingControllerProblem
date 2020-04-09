@@ -1,7 +1,10 @@
 package com.example.greeting.controller;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 @RestController
@@ -26,6 +29,17 @@ public class GreetingController {
     public Greeting greeting(@RequestBody Greeting greeting){
         return new Greeting(counter.incrementAndGet(),
                 String.format(template,greeting.getContent()));
+    }
+
+    @PutMapping("/put/greeting")
+    public Greeting greeting1(@RequestBody Greeting greeting){
+        Greeting greeting1=new Greeting(counter.incrementAndGet(),"Kalyani");
+        greeting1.setContent("Kalyani");
+
+        greeting1.setContent(greeting.getContent());
+
+        return new Greeting(counter.incrementAndGet(),
+                String.format(greeting1.getContent()));
     }
 
 }
