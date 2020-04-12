@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+
 @RestController
 public class GreetingController {
 
@@ -28,7 +30,7 @@ public class GreetingController {
        return greetingService.getAllGreetings();
     }
 
-    @RequestMapping(value = "/find/greeting/byId",method = RequestMethod.GET)
+    @RequestMapping(value = "/find/greeting/byId",method = GET)
     public Greeting findByIdGreeting(@RequestParam(value = "id") Long id){
         return greetingService.getGreetingById(id);
     }
@@ -39,6 +41,11 @@ public class GreetingController {
         user.setFirstName(firstName);
         user.setLastName(lastName);
         return greetingService.updateGreeting(user,id);
+    }
+
+    @RequestMapping(value="/delete/greeting",method=GET)
+    public List<Greeting> deleteGreeting(@RequestParam(value = "id") Long id){
+        return greetingService.deleteGreeting(id);
     }
 
 }

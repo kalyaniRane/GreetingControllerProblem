@@ -49,5 +49,10 @@ public class GreetingService implements IGreetingService {
 
     }
 
-
+    @Override
+    public List<Greeting> deleteGreeting(Long id) {
+        if(!greetingRepository.existsById(id)) throw new GreetingException("Record Can Not Be Deleted");
+        greetingRepository.deleteById(id);
+        return getAllGreetings();
+    }
 }
